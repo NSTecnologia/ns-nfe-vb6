@@ -680,7 +680,7 @@ Public Function previaNFe(conteudo As String, tpConteudo As String) As String
 End Function
 
 'Esta funÃ§Ã£o faz a listagem de nsNRec vinculados a uma chave de NF-e
-Public Function previaNFeESalvar(conteudo As String, tpConteudo As String, caminho As String, nomeArquivo As String) As String
+Public Function previaNFeESalvar(conteudo As String, tpConteudo As String, caminho As String, nomeArquivo As String, exibeNaTela As Boolean) As String
 
     Dim resposta As String
     Dim status As String
@@ -693,6 +693,11 @@ Public Function previaNFeESalvar(conteudo As String, tpConteudo As String, camin
     
     If (status = "200") Then
         Call salvarPDF(pdf, caminho, nomeArquivo, "")
+        If exibeNaTela Then
+
+            ShellExecute 0, "open", caminho & nomeArquivo & "-procNFe.pdf", "", "", vbNormalFocus
+    
+        End If
     Else
         MsgBox ("Ocorreu um erro ao fazer a requisição de previa da NFe. Verifique os logs.")
     End If
