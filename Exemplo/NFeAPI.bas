@@ -660,6 +660,46 @@ Public Function listarNSNRecs(chNFe As String) As String
     listarNSNRecs = resposta
 End Function
 
+'Esta função faz a listagem de nsNRec vinculados a uma chave de NF-e
+Public Function previaNFe(conteudo As String, tpConteudo As String) As String
+
+    Dim url As String
+    Dim resposta As String
+
+    url = "https://nfe.ns.eti.br/util/preview/nfe"
+
+    gravaLinhaLog ("[ENVIO_PREVIA_DADOS]")
+    gravaLinhaLog (conteudo)
+        
+    resposta = enviaConteudoParaAPI(conteudo, url, tpConteudo)
+    
+    gravaLinhaLog ("[ENVIO_PREVIA_RESPOSTA]")
+    gravaLinhaLog (resposta)
+
+    emitirNFe = resposta
+End Function
+
+'Esta função faz a listagem de nsNRec vinculados a uma chave de NF-e
+Public Function previaNFeESalvar(conteudo As String, tpConteudo As String, caminho As String, nomeArquivo As String) As String
+
+    Dim resposta As String
+    Dim status As String
+    Dim pdf As String
+
+    resposta = previaNFe(conteudo, tpConteudo)
+    
+    status = LerDadosJSON(resposta, "status", "", "")
+    pdf = LerDadosJSON(resposta, "pdf", "", "")
+    
+    If (status = "200") Then
+        Call salvarPDF(pdf, caminho, nomeArquivo, "")
+    Else
+        MsgBox ("Ocorreu um erro ao fazer a requisi��o de previa da NFe. Verifique os logs.")
+    End If
+
+    emitirNFe = resposta
+End Function
+
 'Esta função salva um XML
 Public Sub salvarXML(xml As String, caminho As String, chNFe As String, nSeqEvento As String)
     Dim fsT As Object
