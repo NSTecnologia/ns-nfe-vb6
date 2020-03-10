@@ -5,7 +5,7 @@ Public Declare Function ShellExecute Lib "shell32.dll" Alias "ShellExecuteA" (By
 
 'Atributo privado da classe
 Private Const tempoResposta = 500
-Private Const token = "COLQUE_TOKEN"
+Private Const token = "SEU_TOKEN"
 
 'Esta função envia um conteúdo para uma URL, em requisições do tipo POST
 Function enviaConteudoParaAPI(conteudo As String, url As String, tpConteudo As String) As String
@@ -552,7 +552,7 @@ Public Function consultarSituacao(licencaCnpj As String, chNFe As String, tpAmb 
 End Function
 
 'Esta função realiza o envio de e-mail de uma NF-e
-Public Function enviarEmail(chNFe As String, enviaEmailDoc As String, email) As String
+Public Function enviarEmail(chNFe As String, enviaEmailDoc As String, email As String) As String
     Dim json As String
     Dim url As String
     Dim resposta As String
@@ -566,7 +566,7 @@ Public Function enviarEmail(chNFe As String, enviaEmailDoc As String, email) As 
     Dim emails() As String
     Dim i, quantidade As Integer
     
-    emails = Split(email, ",")
+    emails = Split(Trim(email), ",")
     
     quantidade = UBound(emails)
     

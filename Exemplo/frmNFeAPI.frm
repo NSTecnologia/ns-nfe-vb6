@@ -3,14 +3,22 @@ Begin VB.Form frmNFeAPI
    BorderStyle     =   1  'Fixed Single
    Caption         =   "NF-e API"
    ClientHeight    =   9300
-   ClientLeft      =   6810
-   ClientTop       =   990
+   ClientLeft      =   10860
+   ClientTop       =   4635
    ClientWidth     =   10500
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
    ScaleHeight     =   9300
    ScaleWidth      =   10500
+   Begin VB.CommandButton btnTofrmEnviaEmail 
+      Caption         =   "Enviar E-mail"
+      Height          =   375
+      Left            =   8880
+      TabIndex        =   15
+      Top             =   4920
+      Width           =   1455
+   End
    Begin VB.TextBox txtCaminho 
       Height          =   315
       Left            =   120
@@ -149,6 +157,11 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+Private Sub btnTofrmEnviaEmail_Click()
+    frmEnviaEmail.Show
+    frmEnviaEmail.SetFocus
+End Sub
+
 Private Sub cmdEnviar_Click()
     On Error GoTo SAI
     Dim retorno As String
@@ -218,6 +231,6 @@ Private Sub cmdEnviar_Click()
     
     Exit Sub
 SAI:
-    MsgBox ("Problemas ao Requisitar emissão ao servidor" & vbNewLine & Err.Description), vbInformation, titleCTeAPI
+    MsgBox ("Problemas ao Requisitar emissão ao servidor" & vbNewLine & Err.Description), vbInformation, titleNFeAPI
 
 End Sub
