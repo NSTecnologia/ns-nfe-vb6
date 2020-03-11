@@ -1,11 +1,14 @@
 VERSION 5.00
 Begin VB.Form frmEnviaEmail 
+   BorderStyle     =   1  'Fixed Single
    Caption         =   "Enviar Email"
    ClientHeight    =   4440
-   ClientLeft      =   2280
-   ClientTop       =   4980
+   ClientLeft      =   2205
+   ClientTop       =   4905
    ClientWidth     =   6690
    LinkTopic       =   "Form1"
+   MaxButton       =   0   'False
+   MinButton       =   0   'False
    ScaleHeight     =   4440
    ScaleWidth      =   6690
    Begin VB.CommandButton cmdEnviarEmail 
