@@ -676,7 +676,7 @@ Public Function previaNFe(conteudo As String, tpConteudo As String) As String
     gravaLinhaLog ("[ENVIO_PREVIA_RESPOSTA]")
     gravaLinhaLog (resposta)
 
-    emitirNFe = resposta
+    previaNFe = resposta
 End Function
 
 'Esta função faz a listagem de nsNRec vinculados a uma chave de NF-e
@@ -702,7 +702,7 @@ Public Function previaNFeESalvar(conteudo As String, tpConteudo As String, camin
         MsgBox ("Ocorreu um erro ao fazer a requisi��o de previa da NFe. Verifique os logs.")
     End If
 
-    emitirNFe = resposta
+    previaNFeESalvar = resposta
 End Function
 
 'Esta função salva um XML
