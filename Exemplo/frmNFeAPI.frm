@@ -159,7 +159,6 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Private Sub btnTofrmEnviaEmail_Click()
     frmEnviaEmail.Show
-    frmEnviaEmail.SetFocus
 End Sub
 
 Private Sub cmdEnviar_Click()
