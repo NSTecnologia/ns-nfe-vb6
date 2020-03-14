@@ -11,6 +11,14 @@ Begin VB.Form frmNFeAPI
    MinButton       =   0   'False
    ScaleHeight     =   9300
    ScaleWidth      =   10500
+   Begin VB.CommandButton cmdPrevia 
+      Caption         =   "Fazer Previa"
+      Height          =   375
+      Left            =   6600
+      TabIndex        =   16
+      Top             =   4920
+      Width           =   1575
+   End
    Begin VB.CommandButton btnTofrmEnviaEmail 
       Caption         =   "Enviar E-mail"
       Height          =   375
@@ -164,7 +172,6 @@ End Sub
 Private Sub cmdEnviar_Click()
     On Error GoTo SAI
     Dim retorno As String
-    Dim token As String
     
     If (txtCaminho.Text <> "") And (txtConteudo.Text <> "") And (cbTpConteudo.Text <> "") And (cbTpDown.Text <> "") And (txtTpAmb.Text <> "") Then
         
@@ -232,4 +239,15 @@ Private Sub cmdEnviar_Click()
 SAI:
     MsgBox ("Problemas ao Requisitar emissão ao servidor" & vbNewLine & Err.Description), vbInformation, titleNFeAPI
 
+End Sub
+
+Private Sub cmdPrevia_Click()
+    Dim retorno As String
+    Dim i As Integer
+    If (txtCaminho.Text <> "") And (txtConteudo.Text <> "") And (cbTpConteudo.Text <> "") Then
+        retorno = previaNFeESalvar(txtConteudo.Text, cbTpConteudo.Text, txtCaminho.Text, "PreviaTeste", True)
+    Else
+        MsgBox ("Todos campos necessarios devem ser preenchidos ['caminho', 'tipo de conteudo', 'conteudo']")
+    End If
+    
 End Sub

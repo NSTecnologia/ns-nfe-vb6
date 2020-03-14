@@ -5,7 +5,7 @@ Public Declare Function ShellExecute Lib "shell32.dll" Alias "ShellExecuteA" (By
 
 'Atributo privado da classe
 Private Const tempoResposta = 500
-Private Const token = "SEU_TOKEN"
+Private Const token = "4EB15D6DEDAEBAE3FD0B7B5E5B0AD6D4"
 
 'Esta função envia um conteúdo para uma URL, em requisições do tipo POST
 Function enviaConteudoParaAPI(conteudo As String, url As String, tpConteudo As String) As String
@@ -274,14 +274,6 @@ Public Function downloadNFeESalvar(chNFe As String, tpAmb As String, tpDown As S
             
         End If
         
-        If InStr(1, tpDown, "J") Then
-        
-            Dim conteudoJSON() As String
-            conteudoJSON = Split(resposta, """nfeProc"":{")
-            json = "{""nfeProc"":{" & conteudoJSON(1)
-            Call salvarJSON(json, caminho, chNFe, "")
-            
-        End If
         
         If InStr(1, tpDown, "P") Then
         
@@ -382,12 +374,6 @@ Public Function downloadEventoNFeESalvar(chNFe As String, tpAmb As String, tpDow
             End If
             
             Call salvarXML(xml, caminho, chNFe, nSeqEvento)
-            
-        End If
-
-        If InStr(1, tpDown, "J") Then
-            json = LerDadosJSON(resposta, "json", "", "")
-            Call salvarJSON(json, caminho, chNFe, nSeqEvento)
             
         End If
 
@@ -692,11 +678,14 @@ Public Function previaNFeESalvar(conteudo As String, tpConteudo As String, camin
     pdf = LerDadosJSON(resposta, "pdf", "", "")
     
     If (status = "200") Then
-        Call salvarPDF(pdf, caminho, nomeArquivo, "")
+        If Dir(caminho, vbDirectory) = "" Then
+            MkDir (caminho)
+        End If
+        Call salvarPDF(pdf, caminho, nomeArquivo, "previa", "")
         If exibeNaTela Then
 
-            ShellExecute 0, "open", caminho & nomeArquivo & "-procNFe.pdf", "", "", vbNormalFocus
-    
+            ShellExecute 0, "open", caminho & nomeArquivo & nSeqEvento & "-procNFe.pdf", "", "", vbNormalFocus
+            
         End If
     Else
         MsgBox ("Ocorreu um erro ao fazer a requisi��o de previa da NFe. Verifique os logs.")
@@ -705,13 +694,104 @@ Public Function previaNFeESalvar(conteudo As String, tpConteudo As String, camin
     previaNFeESalvar = resposta
 End Function
 
+'Esta função faz a listagem de nsNRec vinculados a uma chave de NF-e
+Public Function cadastrarLicenca(situacao As Integer, idprojeto As Integer, usarAssinaturaLocal As String, server As String, porta As Integer, ssl As Integer, usuario As String, senha As String) As String
+    Dim json As String
+    Dim url As String
+    Dim resposta As String
+    Dim emails() As String
+    Dim telefones() As String
+    Dim i, quantidade As Integer
+    
+    json = "{"
+    json = json & """licen�as"":[{"
+    json = json & """situacao"":" & sitaucao & ","
+    json = json & """idprojeto"":""" & idprojeto & ","
+    json = json & """usarcertns"":" & usarAssinaturaLocal
+    
+    If (usarAssinaturaLocal = "false") Then
+        json = json & """certificado"":{"
+        json = json & """certificado"":" & sitaucao & ","
+        json = json & """senha"":" & sitaucao & "}"
+    End If
+    
+    If (server <> "") Then
+        json = json & "," & """envioemail"":{"
+        json = json & """servidor"":""" & servidor & ""","
+        json = json & """porta"":""" & porta & ""","
+        json = json & """ssl"":""" & ssl & ""","
+        json = json & """confirmaleitura"":""" & confirmaleitura & ""","
+        json = json & """usuario"":""" & usuario & ""","
+        json = json & """senha"":""" & senha & """}"
+    End If
+    
+    If (csc <> "" And idprojeto = 20) Then
+    
+    End If
+    
+    json = json & "]},"
+    
+    'Nodo da pessoa fisica ou juridica
+    json = json & """pessoa"":{"
+    json = json & """cnpj"":""" & CNPJ & ""","
+    json = json & """razao"":""" & razao & ""","
+    json = json & """ie"":""" & ie & ""","
+    json = json & """fantasia"":""" & fantasia & ""","
+    json = json & """tipoicms"":""" & tipoicms & ""","
+    json = json & """emails"":[{"
+    emails = Split(Trim(email), ",")
+    quantidade = UBound(emails)
+    
+    For i = 0 To quantidade
+        If (i = quantidade) Then
+            json = json & """email"":""" & emails(i) & """}],"
+        Else
+            json = json & """email"":""" & emails(i) & ""","
+        End If
+    Next
+    
+    json = json & """ederecos"":[{"
+    json = json & """endereco"":""" & endereco & ""","
+    json = json & """numero"":""" & chNFe & ""","
+    json = json & """bairro"":""" & chNFe & ""","
+    json = json & """cep"":""" & chNFe & ""","
+    json = json & """cidade"":{"
+    json = json & """cIBGE"":" & cIBGE & "}}],"
+    
+    json = json & """telefones"":[{"
+    telefones = Split(Trim(telefone), ",")
+    quantidade = UBound(telefones)
+    
+    For i = 0 To quantidade
+        If (i = quantidade) Then
+            json = json & """numero"":""" & telefones(i) & """}]"
+        Else
+            json = json & """numero"":""" & telefones(i) & ""","
+        End If
+    Next
+    
+    json = json & "}}"
+     
+    url = "http://painelapi.ns.eti.br/licenca/salvarDados"
+    
+    gravaLinhaLog ("[CADASTRAR_LICENCA_DADOS]")
+    gravaLinhaLog (json)
+        
+    resposta = enviaConteudoParaAPI(json, url, "json")
+    
+    gravaLinhaLog ("[CADASTRAR_LICENCA_RESPOSTA]")
+    gravaLinhaLog (resposta)
+
+    cadastrarLicenca = resposta
+End Function
 'Esta função salva um XML
 Public Sub salvarXML(xml As String, caminho As String, chNFe As String, nSeqEvento As String)
     Dim fsT As Object
     Set fsT = CreateObject("ADODB.Stream")
     Dim conteudoSalvar  As String
+    Dim tpEventoSalvar As String
     Dim localParaSalvar As String
-
+    
     'Seta o caminho para o arquivo XML
     If (nSeqEvento = "") Then
         localParaSalvar = caminho & chNFe & nSeqEvento & "-procNFe.xml"
@@ -729,36 +809,15 @@ Public Sub salvarXML(xml As String, caminho As String, chNFe As String, nSeqEven
     fsT.SaveToFile localParaSalvar
 End Sub
 
-'Esta função salva um JSON
-Public Sub salvarJSON(json As String, caminho As String, chNFe As String, nSeqEvento As String)
-    Dim fsT As Object
-    Set fsT = CreateObject("ADODB.Stream")
-    Dim conteudoSalvar  As String
-    Dim localParaSalvar As String
-
-    'Seta o caminho para o arquivo JSON
-    If (nSeqEvento = "") Then
-        localParaSalvar = caminho & chNFe & nSeqEvento & "-procNFe.json"
-    Else
-        localParaSalvar = caminho & chNFe & nSeqEvento & "-procEvenNFe.json"
-    End If
-
-    conteudoSalvar = json
-
-    fsT.Type = 2
-    fsT.Charset = "utf-8"
-    fsT.Open
-    fsT.WriteText conteudoSalvar
-    fsT.SaveToFile localParaSalvar
-End Sub
-
 'Esta função salva um PDF
-Public Function salvarPDF(pdf As String, caminho As String, chNFe As String, nSeqEvento As String) As Boolean
+Public Function salvarPDF(pdf As String, caminho As String, chNFe As String, tpEvento As String, nSeqEvento As String) As Boolean
 On Error GoTo SAI
     Dim conteudoSalvar  As String
+    Dim tpEventoSalvar As String
     Dim localParaSalvar As String
 
-    'Seta o caminho para o arquivo PDF
+    
+    'Seta o caminho para o arquivo XML
     If (nSeqEvento = "") Then
         localParaSalvar = caminho & chNFe & nSeqEvento & "-procNFe.pdf"
     Else
