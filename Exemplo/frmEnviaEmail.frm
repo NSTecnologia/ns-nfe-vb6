@@ -3,8 +3,8 @@ Begin VB.Form frmEnviaEmail
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Enviar Email"
    ClientHeight    =   4440
-   ClientLeft      =   2205
-   ClientTop       =   4905
+   ClientLeft      =   6510
+   ClientTop       =   2565
    ClientWidth     =   6690
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False

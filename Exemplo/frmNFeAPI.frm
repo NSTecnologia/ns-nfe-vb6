@@ -1,30 +1,30 @@
 VERSION 5.00
 Begin VB.Form frmNFeAPI 
    BorderStyle     =   1  'Fixed Single
-   Caption         =   "NF-e API"
+   Caption         =   "Envio de NF- e"
    ClientHeight    =   9300
-   ClientLeft      =   10860
-   ClientTop       =   4635
+   ClientLeft      =   4785
+   ClientTop       =   1455
    ClientWidth     =   10500
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
    ScaleHeight     =   9300
    ScaleWidth      =   10500
-   Begin VB.CommandButton cmdPrevia 
-      Caption         =   "Fazer Previa"
-      Height          =   375
-      Left            =   6600
+   Begin VB.CommandButton cmdTofrmFuncionalidades 
+      Caption         =   "Mais Funcinalidades"
+      Height          =   495
+      Left            =   8640
       TabIndex        =   16
       Top             =   4920
-      Width           =   1575
+      Width           =   1695
    End
-   Begin VB.CommandButton btnTofrmEnviaEmail 
-      Caption         =   "Enviar E-mail"
-      Height          =   375
-      Left            =   8880
+   Begin VB.CommandButton cmdPrevia 
+      Caption         =   "Visualizar Previa"
+      Height          =   495
+      Left            =   5160
       TabIndex        =   15
-      Top             =   4920
+      Top             =   5520
       Width           =   1455
    End
    Begin VB.TextBox txtCaminho 
@@ -99,11 +99,11 @@ Begin VB.Form frmNFeAPI
    End
    Begin VB.CommandButton cmdEnviar 
       Caption         =   "Enviar Documento para Processamento >>>>>>"
-      Height          =   615
-      Left            =   6600
+      Height          =   495
+      Left            =   6720
       TabIndex        =   0
-      Top             =   5400
-      Width           =   3735
+      Top             =   5520
+      Width           =   3615
    End
    Begin VB.Label Label1 
       AutoSize        =   -1  'True
@@ -165,10 +165,6 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-Private Sub btnTofrmEnviaEmail_Click()
-    frmEnviaEmail.Show
-End Sub
-
 Private Sub cmdEnviar_Click()
     On Error GoTo SAI
     Dim retorno As String
@@ -250,4 +246,8 @@ Private Sub cmdPrevia_Click()
         MsgBox ("Todos campos necessarios devem ser preenchidos ['caminho', 'tipo de conteudo', 'conteudo']")
     End If
     
+End Sub
+
+Private Sub cmdTofrmFuncionalidades_Click()
+    frmFuncionalidades.Show
 End Sub

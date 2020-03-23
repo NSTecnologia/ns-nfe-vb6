@@ -3,11 +3,9 @@ Private Declare Sub Sleep Lib "kernel32.dll" (ByVal dwMilliseconds As Long)
 Public Declare Function ShellExecute Lib "shell32.dll" Alias "ShellExecuteA" (ByVal hWnd As Long, ByVal lpOperation As String, ByVal lpFile As String, ByVal lpParameters As String, ByVal lpDirectory As String, ByVal nShowCmd As Long) As Long
 'activate Microsoft XML, v6.0 in references
 
-'Atributo privado da classe
 Private Const tempoResposta = 500
 Private Const token = "4EB15D6DEDAEBAE3FD0B7B5E5B0AD6D4"
 
-'Esta função envia um conteúdo para uma URL, em requisições do tipo POST
 Function enviaConteudoParaAPI(conteudo As String, url As String, tpConteudo As String) As String
 On Error GoTo SAI
     Dim contentType As String
@@ -45,7 +43,7 @@ SAI:
 End Function
 
 'Esta função realiza o processo completo de emissão: envio, consulta e download do documento
-Public Function emitirNFeSincrono(conteudo As String, tpConteudo As String, CNPJ As String, tpDown As String, tpAmb As String, caminho As String, exibeNaTela As Boolean) As String
+Public Function emitirNFeSincrono(conteudo As String, tpConteudo As String, cnpj As String, tpDown As String, tpAmb As String, caminho As String, exibeNaTela As Boolean) As String
     Dim retorno As String
     Dim resposta As String
     Dim statusEnvio As String
@@ -79,7 +77,7 @@ Public Function emitirNFeSincrono(conteudo As String, tpConteudo As String, CNPJ
 
         Sleep (tempoResposta)
 
-        resposta = consultarStatusProcessamento(CNPJ, nsNRec, tpAmb)
+        resposta = consultarStatusProcessamento(cnpj, nsNRec, tpAmb)
         statusConsulta = LerDadosJSON(resposta, "status", "", "")
 
         If (statusConsulta = "200") Then
@@ -160,7 +158,6 @@ Public Function emitirNFeSincrono(conteudo As String, tpConteudo As String, CNPJ
     emitirNFeSincrono = retorno
 End Function
 
-'Esta função realiza o envio de uma NF-e
 Public Function emitirNFe(conteudo As String, tpConteudo As String) As String
 
     Dim url As String
@@ -179,15 +176,14 @@ Public Function emitirNFe(conteudo As String, tpConteudo As String) As String
     emitirNFe = resposta
 End Function
 
-'Esta função realiza a consulta o status de processamento de uma NF-e
-Public Function consultarStatusProcessamento(CNPJ As String, nsNRec As String, tpAmb As String) As String
+Public Function consultarStatusProcessamento(cnpj As String, nsNRec As String, tpAmb As String) As String
     Dim json As String
     Dim url As String
     Dim resposta As String
 
     'Monta o JSON
     json = "{"
-    json = json & """CNPJ"":""" & CNPJ & ""","
+    json = json & """CNPJ"":""" & cnpj & ""","
     json = json & """nsNRec"":""" & nsNRec & ""","
     json = json & """tpAmb"":""" & tpAmb & """"
     json = json & "}"
@@ -205,7 +201,6 @@ Public Function consultarStatusProcessamento(CNPJ As String, nsNRec As String, t
     consultarStatusProcessamento = resposta
 End Function
 
-'Esta função realiza o download de documentos de uma NF-e
 Public Function downloadNFe(chNFe As String, tpDown As String, tpAmb As String) As String
 
     Dim json As String
@@ -229,8 +224,6 @@ Public Function downloadNFe(chNFe As String, tpDown As String, tpAmb As String) 
     
     status = LerDadosJSON(resposta, "status", "", "")
         
-    'O retorno da API será gravado somente em caso de erro,
-    'para não gerar um log extenso com o PDF e XML
     If (status <> "200") Then
     
         gravaLinhaLog ("[DOWNLOAD_NFE_RESPOSTA]")
@@ -246,7 +239,6 @@ Public Function downloadNFe(chNFe As String, tpDown As String, tpAmb As String) 
     downloadNFe = resposta
 End Function
 
-'Esta função realiza o download de documentos de uma NF-e e salva-os
 Public Function downloadNFeESalvar(chNFe As String, tpAmb As String, tpDown As String, caminho As String, exibeNaTela As Boolean) As String
 
     Dim baixarXML As Boolean
@@ -270,7 +262,7 @@ Public Function downloadNFeESalvar(chNFe As String, tpAmb As String, tpDown As S
         If InStr(1, tpDown, "X") Then
         
             xml = LerDadosJSON(resposta, "xml", "", "")
-            Call salvarXML(xml, caminho, chNFe, "")
+            Call salvarXML(xml, caminho, chNFe, "", "")
             
         End If
         
@@ -278,7 +270,7 @@ Public Function downloadNFeESalvar(chNFe As String, tpAmb As String, tpDown As S
         If InStr(1, tpDown, "P") Then
         
             pdf = LerDadosJSON(resposta, "pdf", "", "")
-            Call salvarPDF(pdf, caminho, chNFe, "")
+            Call salvarPDF(pdf, caminho, chNFe, "", "")
             
             If exibeNaTela Then
             
@@ -287,13 +279,12 @@ Public Function downloadNFeESalvar(chNFe As String, tpAmb As String, tpDown As S
             End If
         End If
     Else
-        MsgBox ("Ocorreu um erro, veja o Retorno da API para mais informações")
+        MsgBox ("Ocorreu um erro, veja o Retorno da API para mais informacoes")
     End If
 
     downloadNFeESalvar = resposta
 End Function
 
-'Esta função realiza o download de eventos de uma NF-e
 Public Function downloadEventoNFe(chNFe As String, tpAmb As String, tpDown As String, tpEvento As String, nSeqEvento As String) As String
     Dim json As String
     Dim url As String
@@ -329,24 +320,17 @@ Public Function downloadEventoNFe(chNFe As String, tpAmb As String, tpDown As St
 
     status = LerDadosJSON(resposta, "status", "", "")
     
-    'O retorno da API será gravado somente em caso de erro,
-    'para não gerar um log extenso com o PDF e XML
     If (status <> "200") Then
-
         gravaLinhaLog ("[DOWNLOAD_EVENTO_RESPOSTA]")
         gravaLinhaLog (resposta)
- 
     Else
-        
         gravaLinhaLog ("[DOWNLOAD_EVENTO_STATUS]")
         gravaLinhaLog (status)
-        
     End If
 
     downloadEventoNFe = resposta
 End Function
 
-'Esta função realiza o download de eventos de uma NF-e e salva-os
 Public Function downloadEventoNFeESalvar(chNFe As String, tpAmb As String, tpDown As String, tpEvento As String, nSeqEvento As String, caminho As String, exibeNaTela As Boolean) As String
     Dim baixarXML As Boolean
     Dim baixarPDF As Boolean
@@ -373,7 +357,7 @@ Public Function downloadEventoNFeESalvar(chNFe As String, tpAmb As String, tpDow
                 xml = LerDadosJSON(resposta, "xml", "", "")
             End If
             
-            Call salvarXML(xml, caminho, chNFe, nSeqEvento)
+            Call salvarXML(xml, caminho, chNFe, tpEvento, nSeqEvento)
             
         End If
 
@@ -383,11 +367,11 @@ Public Function downloadEventoNFeESalvar(chNFe As String, tpAmb As String, tpDow
             Else
                 pdf = LerDadosJSON(resposta, "pdf", "", "")
             End If
-            Call salvarPDF(pdf, caminho, chNFe, nSeqEvento)
+            Call salvarPDF(pdf, caminho, chNFe, tpEvento, nSeqEvento)
             
             If exibeNaTela Then
     
-                ShellExecute 0, "open", caminho & chNFe & nSeqEvento & "-procEvenNFe.pdf", "", "", vbNormalFocus
+                ShellExecute 0, "open", caminho & tpEvento & chNFe & nSeqEvento & "-procEvenNFe.pdf", "", "", vbNormalFocus
             
             End If
         End If
@@ -398,7 +382,6 @@ Public Function downloadEventoNFeESalvar(chNFe As String, tpAmb As String, tpDow
     downloadEventoNFeESalvar = resposta
 End Function
 
-'Esta função realiza o cancelamento de uma NF-e
 Public Function cancelarNFe(chNFe As String, tpAmb As String, dhEvento As String, nProt As String, xJust As String, tpDown As String, caminho As String, exibeNaTela As Boolean) As String
     Dim json As String
     Dim url As String
@@ -441,7 +424,6 @@ Public Function cancelarNFe(chNFe As String, tpAmb As String, dhEvento As String
     cancelarNFe = resposta
 End Function
 
-'Esta função realiza a CC-e de uma NF-e
 Public Function corrigirNFe(chNFe As String, tpAmb As String, dhEvento As String, nSeqEvento As String, xCorrecao As String, tpDown As String, caminho As String, exibeNaTela As Boolean) As String
     Dim json As String
     Dim url As String
@@ -484,7 +466,6 @@ Public Function corrigirNFe(chNFe As String, tpAmb As String, dhEvento As String
     corrigirNFe = resposta
 End Function
 
-'Esta função realiza a consulta de cadastro de contribuinte
 Public Function consultarCadastroContribuinte(CNPJCont As String, UF As String, documentoConsulta As String, tpConsulta As String) As String
     Dim json As String
     Dim url As String
@@ -510,8 +491,7 @@ Public Function consultarCadastroContribuinte(CNPJCont As String, UF As String, 
     consultarCadastroContribuinte = resposta
 End Function
 
-'Esta função realiza a consulta de situação de uma NF-e
-Public Function consultarSituacao(licencaCnpj As String, chNFe As String, tpAmb As String, versao As String) As String
+Public Function consultarSituacao(licencaCnpj As String, chNFe As String, tpAmb As String) As String
     Dim json As String
     Dim url As String
     Dim resposta As String
@@ -520,9 +500,7 @@ Public Function consultarSituacao(licencaCnpj As String, chNFe As String, tpAmb 
     json = "{"
     json = json & """licencaCnpj"":""" & licencaCnpj & ""","
     json = json & """chNFe"":""" & chNFe & ""","
-    json = json & """tpAmb"":""" & tpAmb & ""","
-    json = json & """versao"":""" & versao & """"
-    json = json & "}"
+    json = json & """tpAmb"":""" & tpAmb & """}"
 
     url = "https://nfe.ns.eti.br/nfe/stats"
     
@@ -537,7 +515,6 @@ Public Function consultarSituacao(licencaCnpj As String, chNFe As String, tpAmb 
     consultarSituacao = resposta
 End Function
 
-'Esta função realiza o envio de e-mail de uma NF-e
 Public Function enviarEmail(chNFe As String, enviaEmailDoc As String, email As String) As String
     Dim json As String
     Dim url As String
@@ -580,8 +557,7 @@ Public Function enviarEmail(chNFe As String, enviaEmailDoc As String, email As S
     enviarEmail = resposta
 End Function
 
-'Esta função realiza a inutilização de um intervalo de numeração de NF-e
-Public Function inutilizar(cUF As String, tpAmb As String, tpDown As String, ano As String, CNPJ As String, serie As String, nNFIni As String, nNFFin As String, xJust As String, caminho As String, exibeNaTela As Boolean) As String
+Public Function inutilizar(cUF As String, tpAmb As String, tpDown As String, ano As String, cnpj As String, serie As String, nNFIni As String, nNFFin As String, xJust As String, caminho As String, exibeNaTela As Boolean) As String
     Dim json As String
     Dim url As String
     Dim resposta As String
@@ -593,7 +569,7 @@ Public Function inutilizar(cUF As String, tpAmb As String, tpDown As String, ano
     json = json & """cUF"":""" & cUF & ""","
     json = json & """tpAmb"":""" & tpAmb & ""","
     json = json & """ano"":""" & ano & ""","
-    json = json & """CNPJ"":""" & CNPJ & ""","
+    json = json & """CNPJ"":""" & cnpj & ""","
     json = json & """serie"":""" & serie & ""","
     json = json & """nNFIni"":""" & nNFIni & ""","
     json = json & """nNFFin"":""" & nNFFin & ""","
@@ -622,7 +598,6 @@ Public Function inutilizar(cUF As String, tpAmb As String, tpDown As String, ano
     inutilizar = resposta
 End Function
 
-'Esta função faz a listagem de nsNRec vinculados a uma chave de NF-e
 Public Function listarNSNRecs(chNFe As String) As String
     Dim json As String
     Dim url As String
@@ -646,7 +621,6 @@ Public Function listarNSNRecs(chNFe As String) As String
     listarNSNRecs = resposta
 End Function
 
-'Esta função faz a listagem de nsNRec vinculados a uma chave de NF-e
 Public Function previaNFe(conteudo As String, tpConteudo As String) As String
 
     Dim url As String
@@ -665,7 +639,6 @@ Public Function previaNFe(conteudo As String, tpConteudo As String) As String
     previaNFe = resposta
 End Function
 
-'Esta função faz a listagem de nsNRec vinculados a uma chave de NF-e
 Public Function previaNFeESalvar(conteudo As String, tpConteudo As String, caminho As String, nomeArquivo As String, exibeNaTela As Boolean) As String
 
     Dim resposta As String
@@ -688,14 +661,13 @@ Public Function previaNFeESalvar(conteudo As String, tpConteudo As String, camin
             
         End If
     Else
-        MsgBox ("Ocorreu um erro ao fazer a requisi��o de previa da NFe. Verifique os logs.")
+        MsgBox ("Ocorreu um erro ao fazer a requisicao de previa da NFe. Verifique os logs para obter mais informacoes.")
     End If
 
     previaNFeESalvar = resposta
 End Function
 
-'Esta função faz a listagem de nsNRec vinculados a uma chave de NF-e
-Public Function cadastrarLicenca(situacao As Integer, idprojeto As Integer, usarAssinaturaLocal As String, server As String, porta As Integer, ssl As Integer, usuario As String, senha As String) As String
+Public Function cadastrarLicenca(cnpj As String, razao As String, fantasia As String, ie As String, tipoICMS As String, email As String, endereco As String, numero As String, bairro As String, cep As String, cIBGE As String, telefone As String, situacao As String, idprojeto As String, usarAssinaturaLocal As String, certificado As String, senhaCert As String, server As String, porta As String, ssl As String, confirmaLeitura As String, usuario As String, senhaUser As String) As String
     Dim json As String
     Dim url As String
     Dim resposta As String
@@ -704,40 +676,36 @@ Public Function cadastrarLicenca(situacao As Integer, idprojeto As Integer, usar
     Dim i, quantidade As Integer
     
     json = "{"
-    json = json & """licen�as"":[{"
-    json = json & """situacao"":" & sitaucao & ","
-    json = json & """idprojeto"":""" & idprojeto & ","
+    json = json & """licencas"":[{"
+    json = json & """situacao"":""" & situacao & ""","
+    json = json & """idprojeto"":""" & idprojeto & ""","
     json = json & """usarcertns"":" & usarAssinaturaLocal
     
     If (usarAssinaturaLocal = "false") Then
-        json = json & """certificado"":{"
-        json = json & """certificado"":" & sitaucao & ","
-        json = json & """senha"":" & sitaucao & "}"
+        json = json & "," & """certificado"":{"
+        json = json & """certificado"":""" & certificado & ""","
+        json = json & """senha"":""" & senhaCert & """}"
     End If
     
     If (server <> "") Then
-        json = json & "," & """envioemail"":{"
-        json = json & """servidor"":""" & servidor & ""","
+        json = json & "," & """emailenvio"":{"
+        json = json & """servidor"":""" & server & ""","
         json = json & """porta"":""" & porta & ""","
         json = json & """ssl"":""" & ssl & ""","
-        json = json & """confirmaleitura"":""" & confirmaleitura & ""","
+        json = json & """confirmaleitura"":" & confirmaLeitura & ","
         json = json & """usuario"":""" & usuario & ""","
-        json = json & """senha"":""" & senha & """}"
+        json = json & """senha"":""" & senhaUser & """}"
     End If
     
-    If (csc <> "" And idprojeto = 20) Then
-    
-    End If
-    
-    json = json & "]},"
+    json = json & "}],"
     
     'Nodo da pessoa fisica ou juridica
     json = json & """pessoa"":{"
-    json = json & """cnpj"":""" & CNPJ & ""","
+    json = json & """cnpj"":""" & cnpj & ""","
     json = json & """razao"":""" & razao & ""","
     json = json & """ie"":""" & ie & ""","
     json = json & """fantasia"":""" & fantasia & ""","
-    json = json & """tipoicms"":""" & tipoicms & ""","
+    json = json & """tipoicms"":""" & tipoICMS & ""","
     json = json & """emails"":[{"
     emails = Split(Trim(email), ",")
     quantidade = UBound(emails)
@@ -750,11 +718,11 @@ Public Function cadastrarLicenca(situacao As Integer, idprojeto As Integer, usar
         End If
     Next
     
-    json = json & """ederecos"":[{"
+    json = json & """enderecos"":[{"
     json = json & """endereco"":""" & endereco & ""","
-    json = json & """numero"":""" & chNFe & ""","
-    json = json & """bairro"":""" & chNFe & ""","
-    json = json & """cep"":""" & chNFe & ""","
+    json = json & """numero"":""" & numero & ""","
+    json = json & """bairro"":""" & bairro & ""","
+    json = json & """cep"":""" & cep & ""","
     json = json & """cidade"":{"
     json = json & """cIBGE"":" & cIBGE & "}}],"
     
@@ -784,22 +752,20 @@ Public Function cadastrarLicenca(situacao As Integer, idprojeto As Integer, usar
 
     cadastrarLicenca = resposta
 End Function
-'Esta função salva um XML
-Public Sub salvarXML(xml As String, caminho As String, chNFe As String, nSeqEvento As String)
+
+Public Sub salvarXML(xml As String, caminho As String, chNFe As String, tpEvento As String, nSeqEvento As String)
     Dim fsT As Object
     Set fsT = CreateObject("ADODB.Stream")
     Dim conteudoSalvar  As String
     Dim tpEventoSalvar As String
     Dim localParaSalvar As String
     
-    'Seta o caminho para o arquivo XML
     If (nSeqEvento = "") Then
-        localParaSalvar = caminho & chNFe & nSeqEvento & "-procNFe.xml"
+        localParaSalvar = caminho & tpEvento & chNFe & nSeqEvento & "-procNFe.xml"
     Else
-        localParaSalvar = caminho & chNFe & nSeqEvento & "-procEvenNFe.xml"
+        localParaSalvar = caminho & tpEvento & chNFe & nSeqEvento & "-procEvenNFe.xml"
     End If
 
-    'Remove as contrabarras
     conteudoSalvar = Replace(xml, "\""", "")
 
     fsT.Type = 2
@@ -809,15 +775,12 @@ Public Sub salvarXML(xml As String, caminho As String, chNFe As String, nSeqEven
     fsT.SaveToFile localParaSalvar
 End Sub
 
-'Esta função salva um PDF
 Public Function salvarPDF(pdf As String, caminho As String, chNFe As String, tpEvento As String, nSeqEvento As String) As Boolean
 On Error GoTo SAI
     Dim conteudoSalvar  As String
     Dim tpEventoSalvar As String
     Dim localParaSalvar As String
 
-    
-    'Seta o caminho para o arquivo XML
     If (nSeqEvento = "") Then
         localParaSalvar = caminho & chNFe & nSeqEvento & "-procNFe.pdf"
     Else
@@ -829,12 +792,12 @@ On Error GoTo SAI
     Open localParaSalvar For Binary As #fnum
     Put #fnum, 1, Base64Decode(pdf)
     Close fnum
+    
     Exit Function
 SAI:
     MsgBox (Err.Number & " - " & Err.Description), vbCritical
 End Function
 
-'Esta função lê os dados de um JSON
 Public Function LerDadosJSON(sJsonString As String, key1 As String, key2 As String, key3 As String, Optional key4 As String, Optional key5 As String) As String
 On Error GoTo err_handler
     Dim oScriptEngine As ScriptControl
@@ -860,7 +823,6 @@ err_handler:
     Resume Err_Exit
 End Function
 
-'Esta função lê os dados de um XML
 Public Function LerDadosXML(sXml As String, key1 As String, key2 As String) As String
     On Error Resume Next
     LerDadosXML = ""
@@ -869,14 +831,13 @@ Public Function LerDadosXML(sXml As String, key1 As String, key2 As String) As S
     xml.async = False
     
     If xml.loadXML(sXml) Then
-        'Tentar pegar o strCampoXML
         Set objNodeList = xml.getElementsByTagName(key1 & "//" & key2)
         Set objNode = objNodeList.nextNode
         
         Dim valor As String
         valor = objNode.Text
         
-        If Len(Trim(valor)) > 0 Then 'CONSEGUI LER O XML NODE
+        If Len(Trim(valor)) > 0 Then
             LerDadosXML = valor
         End If
         Else
@@ -884,7 +845,6 @@ Public Function LerDadosXML(sXml As String, key1 As String, key2 As String) As S
     End If
 End Function
 
-'Esta função grava uma linha de texto em um arquivo de log
 Public Sub gravaLinhaLog(conteudoSalvar As String)
     Dim fsT As Object
     Set fsT = CreateObject("ADODB.Stream")
