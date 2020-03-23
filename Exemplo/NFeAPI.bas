@@ -4,7 +4,7 @@ Public Declare Function ShellExecute Lib "shell32.dll" Alias "ShellExecuteA" (By
 'activate Microsoft XML, v6.0 in references
 
 Private Const tempoResposta = 500
-Private Const token = "4EB15D6DEDAEBAE3FD0B7B5E5B0AD6D4"
+Private Const token = "SEU_TOKEN"
 
 Function enviaConteudoParaAPI(conteudo As String, url As String, tpConteudo As String) As String
 On Error GoTo SAI

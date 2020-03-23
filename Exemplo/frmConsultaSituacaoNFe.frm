@@ -29,6 +29,7 @@ Begin VB.Form frmConsultaSituacaoNFe
          Height          =   285
          Left            =   840
          TabIndex        =   8
+         Text            =   "35200333642842000104550010000000401027735546"
          Top             =   480
          Width           =   1815
       End
@@ -60,6 +61,7 @@ Begin VB.Form frmConsultaSituacaoNFe
          Height          =   285
          Left            =   840
          TabIndex        =   3
+         Text            =   "33642842000104"
          Top             =   480
          Width           =   1815
       End
@@ -106,7 +108,7 @@ Private Sub cmdConsSit_Click()
     status = LerDadosJSON(resposta, "status", "", "")
     If (status = 200) Then
         cStat = LerDadosJSON(resposta, "retConsSitNFe", "cStat", "")
-        If (cStat = 101) Then
+        If (cStat = 101 Or cStat = 100) Then
             auxInfProt = Split(resposta, """protNFe"":[")
             respInfProt = auxInfProt(1)
             auxInfProt = Split(respInfProt, "]")
