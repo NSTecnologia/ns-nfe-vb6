@@ -241,7 +241,7 @@ Private Sub cmdPrevia_Click()
     Dim retorno As String
     Dim i As Integer
     If (txtCaminho.Text <> "") And (txtConteudo.Text <> "") And (cbTpConteudo.Text <> "") Then
-        retorno = previaNFeESalvar(txtConteudo.Text, cbTpConteudo.Text, txtCaminho.Text, "PreviaTeste", True)
+        retorno = previaNFeESalvar(txtConteudo.Text, cbTpConteudo.Text, txtCaminho.Text, True)
     Else
         MsgBox ("Todos campos necessarios devem ser preenchidos ['caminho', 'tipo de conteudo', 'conteudo']")
     End If

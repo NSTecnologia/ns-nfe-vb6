@@ -639,7 +639,7 @@ Public Function previaNFe(conteudo As String, tpConteudo As String) As String
     previaNFe = resposta
 End Function
 
-Public Function previaNFeESalvar(conteudo As String, tpConteudo As String, caminho As String, nomeArquivo As String, exibeNaTela As Boolean) As String
+Public Function previaNFeESalvar(conteudo As String, tpConteudo As String, caminho As String, exibeNaTela As Boolean) As String
 
     Dim resposta As String
     Dim status As String
@@ -654,10 +654,10 @@ Public Function previaNFeESalvar(conteudo As String, tpConteudo As String, camin
         If Dir(caminho, vbDirectory) = "" Then
             MkDir (caminho)
         End If
-        Call salvarPDF(pdf, caminho, nomeArquivo, "previa", "")
+        Call salvarPDF(pdf, caminho, "Previa", "", "")
         If exibeNaTela Then
 
-            ShellExecute 0, "open", caminho & nomeArquivo & nSeqEvento & "-procNFe.pdf", "", "", vbNormalFocus
+            ShellExecute 0, "open", caminho & "Previa" & "-procNFe.pdf", "", "", vbNormalFocus
             
         End If
     Else
@@ -782,9 +782,9 @@ On Error GoTo SAI
     Dim localParaSalvar As String
 
     If (nSeqEvento = "") Then
-        localParaSalvar = caminho & chNFe & nSeqEvento & "-procNFe.pdf"
+        localParaSalvar = caminho & tpEvento & chNFe & nSeqEvento & "-procNFe.pdf"
     Else
-        localParaSalvar = caminho & chNFe & nSeqEvento & "-procEvenNFe.pdf"
+        localParaSalvar = caminho & tpEvento & chNFe & nSeqEvento & "-procEvenNFe.pdf"
     End If
 
     Dim fnum
