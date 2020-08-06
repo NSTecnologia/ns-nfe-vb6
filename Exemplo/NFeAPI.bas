@@ -753,6 +753,79 @@ Public Function cadastrarLicenca(cnpj As String, razao As String, fantasia As St
     cadastrarLicenca = resposta
 End Function
 
+Public Function gerarXMLEmissao(conteudo As String, tpConteudo As String)
+    Dim url As String
+    Dim resposta As String
+    Dim status As String
+    Dim xml As String
+
+    url = "https://nfe.ns.eti.br/util/generatexml"
+
+    gravaLinhaLog ("[GERAR_XML_ENVIO_DADOS]")
+    gravaLinhaLog (conteudo)
+        
+    resposta = enviaConteudoParaAPI(conteudo, url, tpConteudo)
+    
+    gravaLinhaLog ("[GERAR_XML_ENVIO_RESPOSTA]")
+    gravaLinhaLog (resposta)
+        
+    status = LerDadosJSON(resposta, "status", "", "")
+    If(status<>"200")Then
+        gerarXMLEmissao = resposta
+    End If
+    xml = LerDadosJSON(resposta, "xml", "", "")
+    gerarXMLEmissao = xml
+End Function
+    
+Public Function gerarXMLCanc(conteudo As String, tpConteudo As String)
+    Dim url As String
+    Dim resposta As String
+    Dim status As String
+    Dim xml As String
+
+    url = "https://nfe.ns.eti.br/util/generatecancel"
+
+    gravaLinhaLog ("[GERAR_XML_CANC_DADOS]")
+    gravaLinhaLog (conteudo)
+        
+    resposta = enviaConteudoParaAPI(conteudo, url, tpConteudo)
+    
+    gravaLinhaLog ("[GERAR_XML_CANC_RESPOSTA]")
+    gravaLinhaLog (resposta)
+    
+    status = LerDadosJSON(resposta, "status", "", "")
+    If(status<>"200")Then
+        gerarXMLCanc = resposta
+    End If
+    xml = LerDadosJSON(resposta, "xml", "", "")
+
+    gerarXMLCanc = xml
+End Function
+    
+Public Function gerarXMLCC(conteudo As String, tpConteudo As String)
+    Dim url As String
+    Dim resposta As String
+    Dim status As String
+    Dim xml As String
+
+    url = "https://nfe.ns.eti.br/util/generatecce"
+
+    gravaLinhaLog ("[GERAR_XML_CC_DADOS]")
+    gravaLinhaLog (conteudo)
+        
+    resposta = enviaConteudoParaAPI(conteudo, url, tpConteudo)
+    
+    gravaLinhaLog ("[GERAR_XML_CC_RESPOSTA]")
+    gravaLinhaLog (resposta)
+    status = LerDadosJSON(resposta, "status", "", "")
+    If(status<>"200")Then
+        gerarXMLCC = resposta
+    End If
+    xml = LerDadosJSON(resposta, "xml", "", "")
+
+    gerarXMLCC = xml
+End Function
+    
 Public Sub salvarXML(xml As String, caminho As String, chNFe As String, tpEvento As String, nSeqEvento As String)
     Dim fsT As Object
     Set fsT = CreateObject("ADODB.Stream")
