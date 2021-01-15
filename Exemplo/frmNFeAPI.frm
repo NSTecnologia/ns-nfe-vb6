@@ -11,6 +11,14 @@ Begin VB.Form frmNFeAPI
    MinButton       =   0   'False
    ScaleHeight     =   9300
    ScaleWidth      =   10500
+   Begin VB.CommandButton Command1 
+      Caption         =   "Consulta Cadastro Contribuinte"
+      Height          =   495
+      Left            =   6120
+      TabIndex        =   17
+      Top             =   4920
+      Width           =   2055
+   End
    Begin VB.CommandButton cmdTofrmFuncionalidades 
       Caption         =   "Mais Funcinalidades"
       Height          =   495
@@ -166,6 +174,7 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Private Sub cmdEnviar_Click()
+    
     On Error GoTo SAI
     Dim retorno As String
     
@@ -250,4 +259,8 @@ End Sub
 
 Private Sub cmdTofrmFuncionalidades_Click()
     frmFuncionalidades.Show
+End Sub
+
+Private Sub Command1_Click()
+    frmConsultaCad.Show
 End Sub
