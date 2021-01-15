@@ -1,7 +1,4 @@
-base64Convert = 80, 78, 1051, 506, C
-frmNFeAPI = 89, -13, 1100, 634, C, 258, -12, 1025, 542, C
-NFeAPI = -9, 19, 1076, 620, 
-frmEnviaEmail = -20, -18, 1030, 665, I, 78, 78, 609, 480, C
-frmCadLic = 50, 41, 958, 596, C, 184, 38, 1058, 697, C
-frmConsultaSituacaoNFe = 138, 11, 1158, 628, , 349, 103, 694, 421, C
-frmFuncionalidades = 72, 123, 1020, 565, C, 115, 69, 629, 534, C
+base64Convert = 80, 78, 900, 584, I
+frmNFeAPI = -3, -8, 817, 612, I, -86, -11, 681, 543, C
+NFeAPI = 581, 113, 1401, 714, C
+frmConsultaCad = 25, 25, 482, 621, C, 150, 150, 490, 467, C

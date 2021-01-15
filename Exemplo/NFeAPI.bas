@@ -4,7 +4,7 @@ Public Declare Function ShellExecute Lib "shell32.dll" Alias "ShellExecuteA" (By
 'activate Microsoft XML, v6.0 in references
 
 Private Const tempoResposta = 500
-Private Const token = "SEU_TOKEN"
+Private Const token = "SEU_TOKEN AQUI"
 
 Function enviaConteudoParaAPI(conteudo As String, url As String, tpConteudo As String) As String
 On Error GoTo SAI
@@ -770,7 +770,7 @@ Public Function gerarXMLEmissao(conteudo As String, tpConteudo As String)
     gravaLinhaLog (resposta)
         
     status = LerDadosJSON(resposta, "status", "", "")
-    If(status<>"200")Then
+    If (status <> "200") Then
         gerarXMLEmissao = resposta
     End If
     xml = LerDadosJSON(resposta, "xml", "", "")
@@ -794,7 +794,7 @@ Public Function gerarXMLCanc(conteudo As String, tpConteudo As String)
     gravaLinhaLog (resposta)
     
     status = LerDadosJSON(resposta, "status", "", "")
-    If(status<>"200")Then
+    If (status <> "200") Then
         gerarXMLCanc = resposta
     End If
     xml = LerDadosJSON(resposta, "xml", "", "")
@@ -818,7 +818,7 @@ Public Function gerarXMLCC(conteudo As String, tpConteudo As String)
     gravaLinhaLog ("[GERAR_XML_CC_RESPOSTA]")
     gravaLinhaLog (resposta)
     status = LerDadosJSON(resposta, "status", "", "")
-    If(status<>"200")Then
+    If (status <> "200") Then
         gerarXMLCC = resposta
     End If
     xml = LerDadosJSON(resposta, "xml", "", "")

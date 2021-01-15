@@ -1,0 +1,180 @@
+15/01/2021 16:39:21 - [EMISSAO_SINCRONA_INICIO]
+15/01/2021 16:39:21 - [ENVIO_DADOS]
+15/01/2021 16:39:21 - {
+    "NFe": {
+        "infNFe": {
+            "versao": "4.00",
+            "ide": {
+                "cUF": "43",
+                "cNF": "",
+                "natOp": "VENDA A PRAZO - SEM VALOR FISCAL",
+                "mod": "55",
+                "serie": "0",
+                "nNF": "21008",
+                "dhEmi": "2021-01-12T15:52:00-03:00",
+                "tpNF": "1",
+                "idDest": "1",
+                "cMunFG": "4305108",
+                "tpImp": "1",
+                "tpEmis": "1",
+                "cDV": "6",
+                "tpAmb": "2",
+                "finNFe": "1",
+                "indFinal": "0",
+                "indPres": "9",
+                "procEmi": "0",
+                "verProc": "4.00"
+            },
+            "emit": {
+                "CNPJ": "07364617000135",
+                "xNome": "NF-E EMITIDA EM AMBIENTE DE HOMOLOGACAO - SEM VALOR FISCAL",
+                "enderEmit": {
+                    "xLgr": "Rua Bento Osvaldo Trisch,777",
+                    "nro": ".",
+                    "xCpl": "CX POSTAL 91",
+                    "xBairro": "Pendancino",
+                    "cMun": "4303509",
+                    "xMun": "Caxias do Sul",
+                    "UF": "RS",
+                    "CEP": "95046600",
+                    "fone": "005432200200"
+                },
+                "IE": "0170108708",
+                "CRT": "1"
+            },
+            "dest": {
+                "CNPJ": "07364617000135",
+                "xNome": "NF-E EMITIDA EM AMBIENTE DE HOMOLOGACAO - SEM VALOR FISCAL",
+                "enderDest": {
+                    "xLgr": "AV ANTONIO DURO",
+                    "nro": "0",
+                    "xBairro": "OLARIA",
+                    "cMun": "4303509",
+                    "xMun": "CAMAQUA",
+                    "UF": "RS",
+                    "CEP": "96180000",
+                    "cPais": "1058",
+                    "xPais": "BRASIL"
+                },
+                "indIEDest": "1",
+                "IE": "0170108708",
+                "email": "fernando.konflanz@nstecnologia.com.br"
+            },
+            "det": {
+                "nItem": "1",
+                "prod": {
+                    "cEAN": "SEM GTIN",
+                    "cEANTrib": "SEM GTIN",
+                    "cProd": "123456789",
+                    "xProd": "COCA-COLA LT 250ML",
+                    "NCM": "22021000",
+                    "CEST": "0301100",
+                    "CFOP": "5101",
+                    "uCom": "UN",
+                    "qCom": "1.0000",
+                    "vUnCom": "3.00",
+                    "vProd": "3.00",
+                    "uTrib": "UN",
+                    "qTrib": "1.0000",
+                    "vUnTrib": "3.00",
+                    "indTot": "1",
+                    "nItemPed": "0"
+                },
+                "imposto": {
+                    "ICMS": {
+                        "ICMSSN102": {
+                            "orig": "0",
+                            "CSOSN": "102"
+                        }
+                    },
+                    "IPI": {
+                        "cEnq": "999",
+                        "IPINT": {
+                            "CST": "53"
+                        }
+                    },
+                    "PIS": {
+                        "PISAliq": {
+                            "CST": "01",
+                            "vBC": "3.00",
+                            "pPIS": "1.65",
+                            "vPIS": "0.05"
+                        }
+                    },
+                    "COFINS": {
+                        "COFINSAliq": {
+                            "CST": "01",
+                            "vBC": "3.00",
+                            "pCOFINS": "7.00",
+                            "vCOFINS": "0.21"
+                        }
+                    }
+                }
+            },
+            "total": {
+                "ICMSTot": {
+                    "vBC": "0",
+                    "vICMS": "0",
+                    "vICMSDeson": "0.00",
+                    "vFCPUFDest": "0.00",
+                    "vICMSUFDest": "0.00",
+                    "vICMSUFRemet": "0.00",
+                    "vFCP": "0",
+                    "vBCST": "0",
+                    "vST": "0",
+                    "vFCPST": "0",
+                    "vFCPSTRet": "0.00",
+                    "vProd": "3.00",
+                    "vFrete": "0.00",
+                    "vSeg": "0.00",
+                    "vDesc": "0.00",
+                    "vII": "0.00",
+                    "vIPI": "0.00",
+                    "vIPIDevol": "0.00",
+                    "vPIS": "0.05",
+                    "vCOFINS": "0.21",
+                    "vOutro": "0.00",
+                    "vNF": "3.00",
+                    "vTotTrib": "0.00"
+                }
+            },
+            "transp": {
+                "modFrete": "0",
+                "transporta": {
+                    "CNPJ": "07364617000135",
+                    "xNome": "TRANSPORTADORA TESTE",
+                    "IE": "0170108708",
+                    "xEnder": "ESTR BENTO OSVALDO TRISCH 777",
+                    "xMun": "CAXIAS DO SUL",
+                    "UF": "RS"
+                },
+                "vol": {
+                    "qVol": "0",
+                    "marca": "TESTE",
+                    "nVol": "0",
+                    "pesoL": "0.000",
+                    "pesoB": "0.000"
+                }
+            },
+            "pag": {
+                "detPag": {
+                    "tPag": "01",
+                    "vPag": "5.00"
+                },
+                "vTroco": "2.00"
+            },
+            "infAdic": {
+                "infCpl": "DESCONTO PIS 0,01 COFINS 0,06 LEI 11.196 DE 21/11/2005"
+            }
+        }
+    }
+}
+15/01/2021 16:39:26 - [ENVIO_RESPOSTA]
+15/01/2021 16:39:26 - {"status":200,"motivo":"NF-e enviado para Sefaz","nsNRec":"2304542"}
+15/01/2021 16:39:28 - [CONSULTA_DADOS]
+15/01/2021 16:39:28 - {"CNPJ":"07364617000135","nsNRec":"2304542","tpAmb":"2"}
+15/01/2021 16:39:35 - [CONSULTA_RESPOSTA]
+15/01/2021 16:39:35 - {"status":200,"motivo":"Consulta realizada com sucesso","chNFe":"43210107364617000135550000000210081607532591","cStat":539,"xMotivo":"Rejeicao: Duplicidade de NF-e, com diferenca na Chave de Acesso [chNFe:43210107364617000135550000000210081334664228][nRec:431022028696940]"}
+15/01/2021 16:39:35 - [JSON_RETORNO]
+15/01/2021 16:39:35 - {"statusEnvio":"200","statusConsulta":"200","statusDownload":"","cStat":"539","chNFe":"","nProt":"","motivo":"Rejeicao: Duplicidade de NF-e, com diferenca na Chave de Acesso [chNFe:43210107364617000135550000000210081334664228][nRec:431022028696940]","nsNRec":"2304542","erros":""}
+15/01/2021 16:39:35 - [EMISSAO_SINCRONA_FIM]
