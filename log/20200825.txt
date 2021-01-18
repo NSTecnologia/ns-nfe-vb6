@@ -1,0 +1,20 @@
+25/08/2020 16:03:00 - [CONSULTA_CADASTRO_DADOS]
+25/08/2020 16:03:00 - {"CNPJCont":"07364617000135","UF":"RN","CNPJ":"34561261000283"}
+25/08/2020 16:03:02 - [CONSULTA_CADASTRO_RESPOSTA]
+25/08/2020 16:03:02 - {"status":200,"motivo":"Consulta realizada com sucesso","retConsCad":{"infCons":{"verAplic":"SVRS20180816144937","cStat":111,"xMotivo":"Consulta cadastro com uma ocorrencia","UF":"RN","CNPJ":"34561261000283","dhCons":"2020-08-25T16:03:04","cUF":24,"infCad":[{"IE":"205346014","CNPJ":"34561261000283","UF":"RN","cSit":1,"indCredNFe":4,"indCredCTe":4,"xNome":"LANNA MARA FONSECA PINHEIRO","xRegApur":"SIMPLES NACIONAL","CNAE":4729602,"ender":{"xLgr":"R PILOTO PEREIRA TIM","nro":"1762","xCpl":"LOJA  1","xBairro":"MONTE CASTELO","cMun":"2403251","CEP":"59146220"}}]},"versao":"2.00 "}}
+25/08/2020 16:13:57 - [CONSULTA_CADASTRO_DADOS]
+25/08/2020 16:13:57 - {"CNPJCont":"07364617000135","UF":"RN","CNPJ":"34561261000283"}
+25/08/2020 16:13:58 - [CONSULTA_CADASTRO_RESPOSTA]
+25/08/2020 16:13:58 - {"status":200,"motivo":"Consulta realizada com sucesso","retConsCad":{"infCons":{"verAplic":"SVRS20180816144937","cStat":111,"xMotivo":"Consulta cadastro com uma ocorrencia","UF":"RN","CNPJ":"34561261000283","dhCons":"2020-08-25T16:13:59","cUF":24,"infCad":[{"IE":"205346014","CNPJ":"34561261000283","UF":"RN","cSit":1,"indCredNFe":4,"indCredCTe":4,"xNome":"LANNA MARA FONSECA PINHEIRO","xRegApur":"SIMPLES NACIONAL","CNAE":4729602,"ender":{"xLgr":"R PILOTO PEREIRA TIM","nro":"1762","xCpl":"LOJA  1","xBairro":"MONTE CASTELO","cMun":"2403251","CEP":"59146220"}}]},"versao":"2.00 "}}
+25/08/2020 16:23:58 - [CONSULTA_CADASTRO_DADOS]
+25/08/2020 16:23:58 - {"CNPJCont":"07364617000135","UF":"RN","CNPJ":"34561261000283"}
+25/08/2020 16:23:59 - [CONSULTA_CADASTRO_RESPOSTA]
+25/08/2020 16:23:59 - {"status":200,"motivo":"Consulta realizada com sucesso","retConsCad":{"infCons":{"verAplic":"SVRS20180816144937","cStat":111,"xMotivo":"Consulta cadastro com uma ocorrencia","UF":"RN","CNPJ":"34561261000283","dhCons":"2020-08-25T16:24:00","cUF":24,"infCad":[{"IE":"205346014","CNPJ":"34561261000283","UF":"RN","cSit":1,"indCredNFe":4,"indCredCTe":4,"xNome":"LANNA MARA FONSECA PINHEIRO","xRegApur":"SIMPLES NACIONAL","CNAE":4729602,"ender":{"xLgr":"R PILOTO PEREIRA TIM","nro":"1762","xCpl":"LOJA  1","xBairro":"MONTE CASTELO","cMun":"2403251","CEP":"59146220"}}]},"versao":"2.00 "}}
+25/08/2020 16:24:06 - [CONSULTA_CADASTRO_DADOS]
+25/08/2020 16:24:06 - {"CNPJCont":"07364617000135","UF":"RN","CNPJ":"34561261000283"}
+25/08/2020 16:24:06 - [CONSULTA_CADASTRO_RESPOSTA]
+25/08/2020 16:24:06 - {"status":200,"motivo":"Consulta realizada com sucesso","retConsCad":{"infCons":{"verAplic":"SVRS20180816144937","cStat":111,"xMotivo":"Consulta cadastro com uma ocorrencia","UF":"RN","CNPJ":"34561261000283","dhCons":"2020-08-25T16:24:07","cUF":24,"infCad":[{"IE":"205346014","CNPJ":"34561261000283","UF":"RN","cSit":1,"indCredNFe":4,"indCredCTe":4,"xNome":"LANNA MARA FONSECA PINHEIRO","xRegApur":"SIMPLES NACIONAL","CNAE":4729602,"ender":{"xLgr":"R PILOTO PEREIRA TIM","nro":"1762","xCpl":"LOJA  1","xBairro":"MONTE CASTELO","cMun":"2403251","CEP":"59146220"}}]},"versao":"2.00 "}}
+25/08/2020 16:24:30 - [CONSULTA_CADASTRO_DADOS]
+25/08/2020 16:24:30 - {"CNPJCont":"07364617000135","UF":"RN","CNPJ":"34561261000283"}
+25/08/2020 16:24:31 - [CONSULTA_CADASTRO_RESPOSTA]
+25/08/2020 16:24:31 - {"status":200,"motivo":"Consulta realizada com sucesso","retConsCad":{"infCons":{"verAplic":"SVRS20180816144937","cStat":111,"xMotivo":"Consulta cadastro com uma ocorrencia","UF":"RN","CNPJ":"34561261000283","dhCons":"2020-08-25T16:24:32","cUF":24,"infCad":[{"IE":"205346014","CNPJ":"34561261000283","UF":"RN","cSit":1,"indCredNFe":4,"indCredCTe":4,"xNome":"LANNA MARA FONSECA PINHEIRO","xRegApur":"SIMPLES NACIONAL","CNAE":4729602,"ender":{"xLgr":"R PILOTO PEREIRA TIM","nro":"1762","xCpl":"LOJA  1","xBairro":"MONTE CASTELO","cMun":"2403251","CEP":"59146220"}}]},"versao":"2.00 "}}
