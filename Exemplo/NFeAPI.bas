@@ -4,7 +4,7 @@ Public Declare Function ShellExecute Lib "shell32.dll" Alias "ShellExecuteA" (By
 'activate Microsoft XML, v6.0 in references
 
 Private Const tempoResposta = 500
-Private Const token = "ADQWREQW561D32AWS1D6"
+Private Const token = "SEU_TOKEN_AQUI"
 
 Function enviaConteudoParaAPI(conteudo As String, url As String, tpConteudo As String) As String
 On Error GoTo SAI
@@ -515,15 +515,19 @@ Public Function consultarSituacao(licencaCnpj As String, chNFe As String, tpAmb 
     consultarSituacao = resposta
 End Function
 
-Public Function enviarEmail(chNFe As String, enviaEmailDoc As String, email As String) As String
+Public Function enviarEmail(chNFe As String, enviaEmailDoc As String, anexarPDF as String, email As String) As String
     Dim json As String
     Dim url As String
     Dim resposta As String
+    dim anexarPDF as String
+
+    anexarPDF = "" 'defina aqui com "true", para anexar o pdf no email, o "false" para nao anexar o pdf
 
     'Monta o JSON
     json = "{"
     json = json & """chNFe"":""" & chNFe & ""","
     json = json & """enviaEmailDoc"":" & enviaEmailDoc & ","
+    json = json & """anexarPDF"":" & anexarPDF & ","
     json = json & """email"":["
     
     Dim emails() As String
