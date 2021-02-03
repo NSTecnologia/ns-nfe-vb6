@@ -713,6 +713,11 @@ Public Function cadastrarLicenca(cnpj As String, razao As String, fantasia As St
     json = json & """emails"":[{"
     emails = Split(Trim(email), ",")
     quantidade = UBound(emails)
+
+    If (email = 0) Then
+        MsgBox ("Por favor, informe um email para o cadastro.")
+        Exit Sub
+    End If
     
     For i = 0 To quantidade
         If (i = quantidade) Then
