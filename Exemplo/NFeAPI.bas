@@ -278,6 +278,21 @@ Public Function downloadNFeESalvar(chNFe As String, tpAmb As String, tpDown As S
             
             End If
         End If
+
+        If InStr(1, tpDown, "XP") Then
+        
+            pdf = LerDadosJSON(resposta, "pdf", "", "")
+            Call salvarPDF(pdf, caminho, chNFe, "", "")
+            xml = LerDadosJSON(resposta, "xml", "", "")
+            Call salvarXML(xml, caminho, chNFe, "", "")
+            
+            If exibeNaTela Then
+            
+                ShellExecute 0, "open", caminho & chNFe & "-procNFe.pdf", "", "", vbNormalFocus
+            
+            End If
+        End If
+
     Else
         MsgBox ("Ocorreu um erro, veja o Retorno da API para mais informacoes")
     End If
@@ -367,11 +382,36 @@ Public Function downloadEventoNFeESalvar(chNFe As String, tpAmb As String, tpDow
             Else
                 pdf = LerDadosJSON(resposta, "pdf", "", "")
             End If
+
             Call salvarPDF(pdf, caminho, chNFe, tpEvento, nSeqEvento)
             
             If exibeNaTela Then
     
                 ShellExecute 0, "open", caminho & tpEvento & chNFe & nSeqEvento & "-procEvenNFe.pdf", "", "", vbNormalFocus
+            
+            End If
+        End If
+
+        If InStr(1, tpDown, "XP") Then
+        
+            If (tpEvento = "INUT") Then
+
+                xml = LerDadosJSON(resposta, "retInut", "xml", "")
+
+                pdf = LerDadosJSON(resposta, "retInut", "pdf", "")
+            Else
+
+                xml = LerDadosJSON(resposta, "xml", "", "")
+                
+                pdf = LerDadosJSON(resposta, "pdf", "", "")
+            End If
+            
+            Call salvarXML(xml, caminho, chNFe, tpEvento, nSeqEvento)
+            Call salvarPDF(pdf, caminho, chNFe, tpEvento, nSeqEvento)
+            
+            If exibeNaTela Then
+            
+                ShellExecute 0, "open", caminho & chNFe & "-procNFe.pdf", "", "", vbNormalFocus
             
             End If
         End If
@@ -609,6 +649,7 @@ Public Function listarNSNRecs(chNFe As String) As String
 
     'Monta o JSON
     json = "{"
+    json = json & """X-AUTH-TOKEN"":""" $ token & """"
     json = json & """chNFe"":""" & chNFe & """"
     json = json & "}"
 
@@ -713,11 +754,6 @@ Public Function cadastrarLicenca(cnpj As String, razao As String, fantasia As St
     json = json & """emails"":[{"
     emails = Split(Trim(email), ",")
     quantidade = UBound(emails)
-
-    If (email = 0) Then
-        MsgBox ("Por favor, informe um email para o cadastro.")
-        Exit Sub
-    End If
     
     For i = 0 To quantidade
         If (i = quantidade) Then
