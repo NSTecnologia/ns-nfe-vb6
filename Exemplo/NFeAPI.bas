@@ -555,11 +555,11 @@ Public Function consultarSituacao(licencaCnpj As String, chNFe As String, tpAmb 
     consultarSituacao = resposta
 End Function
 
-Public Function enviarEmail(chNFe As String, enviaEmailDoc As String, anexarPDF as String, email As String) As String
+Public Function enviarEmail(chNFe As String, enviaEmailDoc As String, anexarPDF As String, email As String) As String
     Dim json As String
     Dim url As String
     Dim resposta As String
-    dim anexarPDF as String
+    Dim anexarPDF As String
 
     anexarPDF = "" 'defina aqui com "true", para anexar o pdf no email, o "false" para nao anexar o pdf
 
@@ -712,7 +712,7 @@ Public Function previaNFeESalvar(conteudo As String, tpConteudo As String, camin
     previaNFeESalvar = resposta
 End Function
 
-Public Function cadastrarLicenca(cnpj As String, razao As String, fantasia As String, ie As String, tipoICMS As String, email As String, endereco As String, numero As String, bairro As String, cep As String, cIBGE As String, telefone As String, situacao As String, idprojeto As String, usarAssinaturaLocal As String, certificado As String, senhaCert As String, server As String, porta As String, ssl As String, confirmaLeitura As String, usuario As String, senhaUser As String) As String
+Public Function cadastrarLicenca(cnpj As String, razao As String, fantasia As String, ie As String, tipoICMS As String, email As String, endereco As String, numero As String, bairro As String, CEP As String, cIBGE As String, telefone As String, situacao As String, idprojeto As String, usarAssinaturaLocal As String, certificado As String, senhaCert As String, server As String, porta As String, ssl As String, confirmaLeitura As String, usuario As String, senhaUser As String) As String
     Dim json As String
     Dim url As String
     Dim resposta As String
@@ -767,7 +767,7 @@ Public Function cadastrarLicenca(cnpj As String, razao As String, fantasia As St
     json = json & """endereco"":""" & endereco & ""","
     json = json & """numero"":""" & numero & ""","
     json = json & """bairro"":""" & bairro & ""","
-    json = json & """cep"":""" & cep & ""","
+    json = json & """cep"":""" & CEP & ""","
     json = json & """cidade"":{"
     json = json & """cIBGE"":" & cIBGE & "}}],"
     

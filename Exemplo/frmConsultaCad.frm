@@ -4,47 +4,44 @@ Begin VB.Form frmConsultaCad
    ClientHeight    =   5850
    ClientLeft      =   120
    ClientTop       =   450
-   ClientWidth     =   5505
+   ClientWidth     =   6045
    LinkTopic       =   "Form1"
    ScaleHeight     =   5850
-   ScaleWidth      =   5505
+   ScaleWidth      =   6045
    StartUpPosition =   3  'Windows Default
    Begin VB.TextBox txtRetornoCNPJ 
       Height          =   375
-      Left            =   840
-      TabIndex        =   17
+      Left            =   1050
+      TabIndex        =   16
       Top             =   2760
       Width           =   1935
    End
    Begin VB.TextBox txtRetornoIE 
       Height          =   405
-      Left            =   3360
-      TabIndex        =   16
-      Top             =   2760
+      Left            =   3735
+      TabIndex        =   15
+      Top             =   2745
       Width           =   1935
    End
    Begin VB.TextBox txtCNPJ_CPF 
       Height          =   375
       Left            =   2760
-      TabIndex        =   15
-      Text            =   "34561261000283"
+      TabIndex        =   14
       Top             =   1200
       Width           =   1815
    End
    Begin VB.TextBox txtUF 
       Height          =   375
-      Left            =   120
-      TabIndex        =   14
-      Text            =   "RN"
+      Left            =   105
+      TabIndex        =   13
       Top             =   1080
       Width           =   495
    End
    Begin VB.TextBox txtCNPJCont 
       Height          =   375
       Left            =   120
-      TabIndex        =   13
-      Text            =   "07364617000135"
-      Top             =   360
+      TabIndex        =   12
+      Top             =   345
       Width           =   2535
    End
    Begin VB.ComboBox cbTtipoContrib 
@@ -52,30 +49,30 @@ Begin VB.Form frmConsultaCad
       ItemData        =   "frmConsultaCad.frx":0000
       Left            =   1440
       List            =   "frmConsultaCad.frx":000D
-      TabIndex        =   12
+      TabIndex        =   11
       Text            =   "CNPJ"
       Top             =   1200
       Width           =   1095
    End
    Begin VB.TextBox txtRetornoCep 
       Height          =   375
-      Left            =   720
+      Left            =   1020
       TabIndex        =   4
-      Top             =   4200
+      Top             =   4155
       Width           =   1575
    End
    Begin VB.TextBox txtRetornoXLgr 
       Height          =   375
-      Left            =   720
+      Left            =   1035
       TabIndex        =   3
-      Top             =   3720
+      Top             =   3690
       Width           =   4695
    End
    Begin VB.TextBox txtRetornoNome 
       Height          =   375
-      Left            =   720
+      Left            =   1035
       TabIndex        =   2
-      Top             =   3240
+      Top             =   3225
       Width           =   4695
    End
    Begin VB.CommandButton cmdConsultarCad 
@@ -86,53 +83,64 @@ Begin VB.Form frmConsultaCad
       Top             =   1800
       Width           =   1695
    End
+   Begin VB.Label Label10 
+      AutoSize        =   -1  'True
+      BorderStyle     =   1  'Fixed Single
+      Caption         =   "I.E."
+      Height          =   255
+      Left            =   3135
+      TabIndex        =   18
+      Top             =   2835
+      Width           =   300
+   End
+   Begin VB.Label Label3 
+      AutoSize        =   -1  'True
+      BorderStyle     =   1  'Fixed Single
+      Caption         =   "CNPJ a Consultar"
+      Height          =   255
+      Left            =   2760
+      TabIndex        =   17
+      Top             =   885
+      Width           =   1305
+   End
    Begin VB.Label Label9 
       AutoSize        =   -1  'True
       BorderStyle     =   1  'Fixed Single
-      Caption         =   "xNome"
+      Caption         =   "Razão"
       Height          =   255
-      Left            =   120
-      TabIndex        =   11
-      Top             =   3240
-      Width           =   555
+      Left            =   165
+      TabIndex        =   10
+      Top             =   3300
+      Width           =   525
    End
    Begin VB.Label Label8 
       AutoSize        =   -1  'True
       BorderStyle     =   1  'Fixed Single
       Caption         =   "CEP"
       Height          =   255
-      Left            =   120
-      TabIndex        =   10
-      Top             =   4320
+      Left            =   180
+      TabIndex        =   9
+      Top             =   4215
       Width           =   375
    End
    Begin VB.Label Label7 
       AutoSize        =   -1  'True
       BorderStyle     =   1  'Fixed Single
-      Caption         =   "xLgr"
+      Caption         =   "Endereço"
       Height          =   255
-      Left            =   120
-      TabIndex        =   9
-      Top             =   3840
-      Width           =   360
-   End
-   Begin VB.Label Label6 
-      AutoSize        =   -1  'True
-      Caption         =   "IE"
-      Height          =   195
-      Left            =   3120
+      Left            =   150
       TabIndex        =   8
-      Top             =   2880
-      Width           =   150
+      Top             =   3735
+      Width           =   750
    End
    Begin VB.Label Label5 
       AutoSize        =   -1  'True
       BorderStyle     =   1  'Fixed Single
       Caption         =   "CNPJ"
       Height          =   255
-      Left            =   120
+      Left            =   165
       TabIndex        =   7
-      Top             =   2880
+      Top             =   2820
       Width           =   465
    End
    Begin VB.Label Label4 
@@ -140,30 +148,30 @@ Begin VB.Form frmConsultaCad
       BorderStyle     =   1  'Fixed Single
       Caption         =   "Retorno Consulta"
       Height          =   255
-      Left            =   120
+      Left            =   480
       TabIndex        =   6
-      Top             =   2400
+      Top             =   2415
       Width           =   1290
    End
    Begin VB.Label Label1 
       AutoSize        =   -1  'True
       BorderStyle     =   1  'Fixed Single
-      Caption         =   "UF(ex:RS)"
+      Caption         =   "UF"
       Height          =   255
       Left            =   120
       TabIndex        =   5
       Top             =   840
-      Width           =   795
+      Width           =   270
    End
    Begin VB.Label Label2 
       AutoSize        =   -1  'True
       BorderStyle     =   1  'Fixed Single
-      Caption         =   "CNPJCont"
+      Caption         =   "CNPJ"
       Height          =   255
       Left            =   120
       TabIndex        =   0
       Top             =   120
-      Width           =   795
+      Width           =   465
    End
 End
 Attribute VB_Name = "frmConsultaCad"
@@ -195,35 +203,19 @@ Private Sub cmdConsultarCad_Click()
     retorno = consultarCadastroContribuinte(txtCNPJCont.Text, txtUF.Text, txtCNPJ_CPF.Text, cbTtipoContrib.Text)
     
     status = LerDadosJSON(retorno, "status", "", "")
+    
     If (status = 200) Then
-        auxInfCad = Split(retorno, """infCad"":[")
-        auxInfCad = Split(auxInfCad(1), "]")
-        auxInfCad = Split(auxInfCad(0), "},")
+        cStat = LerDadosJSON(retorno, "retConsCad", "infCons", "cStat")
 
-        If (UBound(auxInfCad) = 0) Then
-            infCad = auxInfCad(0)
+        If (cStat = "111") Or (cStat = "112") Then
+            motivo = LerDadosJSON(retorno, "motivo", "", "")
+            MsgBox (motivo)
+            auxInfCad = Split(retorno, """infCad"":[")
+            auxInfCad = Split(auxInfCad(1), "]")
+            auxInfCad = Split(auxInfCad(0), "},")
 
-            ie = LerDadosJSON(infCad, "IE", "", "")
-            cnpj = LerDadosJSON(infCad, "CNPJ", "", "")
-            UF = LerDadosJSON(infCad, "UF", "", "")
-            xNome = LerDadosJSON(infCad, "xNome", "", "")
-            xLgr = LerDadosJSON(infCad, "ender", "xLgr", "")
-            CEP = LerDadosJSON(infCad, "ender", "CEP", "")
-            
-            txtRetornoCNPJ.Text = cnpj
-            txtRetornoIE.Text = ie
-            txtRetornoNome.Text = xNome
-            txtRetornoXLgr.Text = xLgr
-            txtRetornoCep.Text = CEP
-
-        Else
-            Dim i As Integer
-            For i = 0 To UBound(auxInfCad)
-                infCad = auxInfCad(i)
-
-                If (i <> UBound(auxInfCad)) Then
-                    infCad = infCad & "}"
-                End If
+            If (UBound(auxInfCad) = 0) Then
+                infCad = auxInfCad(0)
 
                 ie = LerDadosJSON(infCad, "IE", "", "")
                 cnpj = LerDadosJSON(infCad, "CNPJ", "", "")
@@ -231,13 +223,47 @@ Private Sub cmdConsultarCad_Click()
                 xNome = LerDadosJSON(infCad, "xNome", "", "")
                 xLgr = LerDadosJSON(infCad, "ender", "xLgr", "")
                 CEP = LerDadosJSON(infCad, "ender", "CEP", "")
-            Next
+            
+                txtRetornoCNPJ.Text = cnpj
+                txtRetornoIE.Text = ie
+                txtRetornoNome.Text = xNome
+                txtRetornoXLgr.Text = xLgr
+                txtRetornoCep.Text = CEP
+
+            Else
+                Dim i As Integer
+                For i = 0 To UBound(auxInfCad)
+                    infCad = auxInfCad(i)
+
+                    If (i <> UBound(auxInfCad)) Then
+                        infCad = infCad & "}"
+                    End If
+
+                    ie = LerDadosJSON(infCad, "IE", "", "")
+                    cnpj = LerDadosJSON(infCad, "CNPJ", "", "")
+                    UF = LerDadosJSON(infCad, "UF", "", "")
+                    xNome = LerDadosJSON(infCad, "xNome", "", "")
+                    xLgr = LerDadosJSON(infCad, "ender", "xLgr", "")
+                    CEP = LerDadosJSON(infCad, "ender", "CEP", "")
+                Next
+            End If
         End If
+        
+        If (cStat <> "111") Then
+            xMotivo = LerDadosJSON(retorno, "retConsCad", "infCons", "xMotivo")
+            MsgBox (xMotivo)
+        End If
+
+        
+    End If
+     
+    If (status <> 200) Then
+        motivo = LerDadosJSON(retorno, "motivo", "", "")
+        MsgBox (xMotivo)
     End If
     
-    
-    Exit Sub
+Exit Sub
     
 SAI:
-    MsgBox ("Problemas ao Requisitar emissão ao servidor" & vbNewLine & Err.Description), vbInformation, titleNFeAPI
+    MsgBox (vbNewLine & Err.Description), vbInformation, titleNFeAPI
 End Sub
