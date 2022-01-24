@@ -4,7 +4,7 @@ Public Declare Function ShellExecute Lib "shell32.dll" Alias "ShellExecuteA" (By
 'activate Microsoft XML, v6.0 in references
 
 Private Const tempoResposta = 500
-Private Const token = "SEU_TOKEN_AQUI"
+Private Const token = "SEU TOKEN AQUI"
 
 Function enviaConteudoParaAPI(conteudo As String, url As String, tpConteudo As String) As String
 On Error GoTo SAI
@@ -278,21 +278,6 @@ Public Function downloadNFeESalvar(chNFe As String, tpAmb As String, tpDown As S
             
             End If
         End If
-
-        If InStr(1, tpDown, "XP") Then
-        
-            pdf = LerDadosJSON(resposta, "pdf", "", "")
-            Call salvarPDF(pdf, caminho, chNFe, "", "")
-            xml = LerDadosJSON(resposta, "xml", "", "")
-            Call salvarXML(xml, caminho, chNFe, "", "")
-            
-            If exibeNaTela Then
-            
-                ShellExecute 0, "open", caminho & chNFe & "-procNFe.pdf", "", "", vbNormalFocus
-            
-            End If
-        End If
-
     Else
         MsgBox ("Ocorreu um erro, veja o Retorno da API para mais informacoes")
     End If
@@ -382,36 +367,11 @@ Public Function downloadEventoNFeESalvar(chNFe As String, tpAmb As String, tpDow
             Else
                 pdf = LerDadosJSON(resposta, "pdf", "", "")
             End If
-
             Call salvarPDF(pdf, caminho, chNFe, tpEvento, nSeqEvento)
             
             If exibeNaTela Then
     
                 ShellExecute 0, "open", caminho & tpEvento & chNFe & nSeqEvento & "-procEvenNFe.pdf", "", "", vbNormalFocus
-            
-            End If
-        End If
-
-        If InStr(1, tpDown, "XP") Then
-        
-            If (tpEvento = "INUT") Then
-
-                xml = LerDadosJSON(resposta, "retInut", "xml", "")
-
-                pdf = LerDadosJSON(resposta, "retInut", "pdf", "")
-            Else
-
-                xml = LerDadosJSON(resposta, "xml", "", "")
-                
-                pdf = LerDadosJSON(resposta, "pdf", "", "")
-            End If
-            
-            Call salvarXML(xml, caminho, chNFe, tpEvento, nSeqEvento)
-            Call salvarPDF(pdf, caminho, chNFe, tpEvento, nSeqEvento)
-            
-            If exibeNaTela Then
-            
-                ShellExecute 0, "open", caminho & chNFe & "-procNFe.pdf", "", "", vbNormalFocus
             
             End If
         End If
@@ -555,19 +515,15 @@ Public Function consultarSituacao(licencaCnpj As String, chNFe As String, tpAmb 
     consultarSituacao = resposta
 End Function
 
-Public Function enviarEmail(chNFe As String, enviaEmailDoc As String, anexarPDF As String, email As String) As String
+Public Function enviarEmail(chNFe As String, enviaEmailDoc As String, email As String) As String
     Dim json As String
     Dim url As String
     Dim resposta As String
-    Dim anexarPDF As String
-
-    anexarPDF = "" 'defina aqui com "true", para anexar o pdf no email, o "false" para nao anexar o pdf
 
     'Monta o JSON
     json = "{"
     json = json & """chNFe"":""" & chNFe & ""","
     json = json & """enviaEmailDoc"":" & enviaEmailDoc & ","
-    json = json & """anexarPDF"":" & anexarPDF & ","
     json = json & """email"":["
     
     Dim emails() As String
@@ -649,7 +605,6 @@ Public Function listarNSNRecs(chNFe As String) As String
 
     'Monta o JSON
     json = "{"
-    json = json & """X-AUTH-TOKEN"":""" $ token & """"
     json = json & """chNFe"":""" & chNFe & """"
     json = json & "}"
 
@@ -712,7 +667,7 @@ Public Function previaNFeESalvar(conteudo As String, tpConteudo As String, camin
     previaNFeESalvar = resposta
 End Function
 
-Public Function cadastrarLicenca(cnpj As String, razao As String, fantasia As String, ie As String, tipoICMS As String, email As String, endereco As String, numero As String, bairro As String, CEP As String, cIBGE As String, telefone As String, situacao As String, idprojeto As String, usarAssinaturaLocal As String, certificado As String, senhaCert As String, server As String, porta As String, ssl As String, confirmaLeitura As String, usuario As String, senhaUser As String) As String
+Public Function cadastrarLicenca(cnpj As String, razao As String, fantasia As String, ie As String, tipoICMS As String, email As String, endereco As String, numero As String, bairro As String, cep As String, cIBGE As String, telefone As String, situacao As String, idprojeto As String, usarAssinaturaLocal As String, certificado As String, senhaCert As String, server As String, porta As String, ssl As String, confirmaLeitura As String, usuario As String, senhaUser As String) As String
     Dim json As String
     Dim url As String
     Dim resposta As String
@@ -767,7 +722,7 @@ Public Function cadastrarLicenca(cnpj As String, razao As String, fantasia As St
     json = json & """endereco"":""" & endereco & ""","
     json = json & """numero"":""" & numero & ""","
     json = json & """bairro"":""" & bairro & ""","
-    json = json & """cep"":""" & CEP & ""","
+    json = json & """cep"":""" & cep & ""","
     json = json & """cidade"":{"
     json = json & """cIBGE"":" & cIBGE & "}}],"
     
