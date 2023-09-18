@@ -15,7 +15,7 @@ Para utilizar as funções de comunicação com a API, você precisa realizar os
 3. Abra o seu projeto e importe a pasta copiada.
 4.A aplicação utiliza as bibliotecas **Microsoft Script Control 1.0** e **Active Microsoft XML, v6.0** para realizar a comunicação com a API e fazer a manipulação de dados JSON, respectivamente. Ative as duas referencias em: **Project > References**. 
 
-**Pronto!** Agora, você já pode consumir a NS Suite API através do seu sistema. Todas as funcionalidades de comunicação foram implementadas na classe NSSuite.java.
+**Pronto!** Agora, você já pode consumir a NFe em VB6 através do seu sistema.
 
 ------
 
